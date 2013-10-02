@@ -74,6 +74,9 @@ void readEntryList(Entry** entryList, int* n){
     char c;
     inFile.get(c); //consume the comma, because >> does not do so
     inFile >> (*entryList)[i].y; //Don't need to worry about consuming the \n, because getline handles this
+    while(isspace(inFile.peek())){
+      inFile.get(c);
+    }
   }
 }
 
