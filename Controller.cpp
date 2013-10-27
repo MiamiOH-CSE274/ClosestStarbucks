@@ -9,7 +9,7 @@
 #include <fstream>
 #include <cmath>
 
-#include "brinkmwjStarbucks.h"
+#include "blaseddStarbucks.h"
 
 #define PI 3.14159265
 //This code is based on http://www.movable-type.co.uk/scripts/latlong.html
@@ -82,7 +82,7 @@ void readEntryList(Entry** entryList, int* n){
 
 int main(){
   {
-    brinkmwjStarbucks sS;
+    blaseddStarbucks<double, Entry> sS;
 
     int n;
     Entry* entryList;
