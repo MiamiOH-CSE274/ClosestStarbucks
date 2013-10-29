@@ -82,7 +82,7 @@ void readEntryList(Entry** entryList, int* n){
 
 int main(){
   {
-    blaseddStarbucks<double, Entry> sS;
+    blaseddStarbucks sS;
 
     int n;
     Entry* entryList;

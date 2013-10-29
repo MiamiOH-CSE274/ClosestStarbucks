@@ -9,12 +9,12 @@
 #include "BST.h"
 #include "Starbucks.h"
 
-template <class Key, class T>
+//template <class Key, class T>
 class blaseddStarbucks: public Starbucks{
 public:
     blaseddStarbucks();
     ~blaseddStarbucks();
-    BST<Key, T> tree;
+    BST<double, Entry> tree;
     
        virtual void build(Entry* c, int n);
 	
@@ -26,4 +26,4 @@ public:
 
 
 
-#include "blaseddStarbucks.cpp"
+#include "blaseddStarbucks.ipp"

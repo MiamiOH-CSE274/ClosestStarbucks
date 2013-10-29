@@ -107,7 +107,6 @@ Node<Key,T>* BST<Key,T>::next(Key k, Node<Key,T>* r){
             curPtr = curPtr->left;
         }
         else if (curPtr->k < k){
-            previousPtr = curPtr;
             curPtr = curPtr->right;
         }
         else{
