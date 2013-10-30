@@ -8,8 +8,10 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include "time.h"
 
-#include "brinkmwjStarbucks.h"
+//#include "Starbucks.h"
+#include "zirkleacStarbucks.cpp"
 
 #define PI 3.14159265
 //This code is based on http://www.movable-type.co.uk/scripts/latlong.html
@@ -82,13 +84,13 @@ void readEntryList(Entry** entryList, int* n){
 
 int main(){
   {
-    brinkmwjStarbucks sS;
+    zirkleacStarbucks sS;
 
     int n;
     Entry* entryList;
     readEntryList(&entryList, &n); //Helper function
 
-    //randomly scramble the entryList
+    ///randomly scramble the entryList
     srand(5);
     for(int i=0; i<n; i++){
       int j = i + rand()%(n-i);

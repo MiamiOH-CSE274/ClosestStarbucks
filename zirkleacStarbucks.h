@@ -1,0 +1,32 @@
+#pragma once
+#include "c:\users\andrew\desktop\starbucks\starbucks.h"
+//template <class Entry>
+class Node {
+public:
+  Entry* data;
+  Node* firQuad;
+  Node* secQuad;
+  Node* triQuad;
+  Node* quadQuad;
+};
+//#include "Starbucks.h";
+template <class Key, class T>
+class zirkleacStarbucks : public Starbucks<Key, Entry> //:
+	//public Starbucks
+{
+
+public:
+	
+	zirkleacStarbucks(void);
+	virtual ~zirkleacStarbucks(void);
+	Entry getNearest();
+	//void build();
+	void build(Entry* c, int n);
+private:
+	void add(Entry r);
+	
+	void getNearestr(double x, double y, Node* r);
+	Node* addr(std::string s,std::string adr,double x, double y);
+	//Node<Entry>* root;
+};
+
