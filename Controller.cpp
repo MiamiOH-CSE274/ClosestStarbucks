@@ -11,7 +11,8 @@
 #include "time.h"
 
 //#include "Starbucks.h"
-#include "zirkleacStarbucks.cpp"
+#include "zirkleacStarbucks.h"
+//#include "zirkleacStarbucks.cpp"
 
 #define PI 3.14159265
 //This code is based on http://www.movable-type.co.uk/scripts/latlong.html
@@ -104,7 +105,7 @@ int main(){
      * get numbers anywhere from 0ms to 60ms.
      */
     clock_t startb = clock();
-    sS.build(entryList, n);
+	sS.build(entryList,n);
     clock_t endb = clock();
     std::cout << "Building the data structure took: " << 1000.0*(endb-startb)/CLOCKS_PER_SEC << " milliseconds" << std::endl;
 

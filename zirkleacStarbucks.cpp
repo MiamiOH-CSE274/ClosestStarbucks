@@ -1,16 +1,15 @@
 #include "zirkleacStarbucks.h"
-
 //#define NULL 0;
 Node* root;
 //zirkleacStarbucks::zirkleacStarbucks():Starbucks<class Key, class T>(){}
-template <class Key, class T>
-zirkleacStarbucks<Key,T>::zirkleacStarbucks(void)
+//template <class Key, class T>
+zirkleacStarbucks::zirkleacStarbucks()
 {
 	root = NULL;
 }
 
-template <class Key, class T>
-zirkleacStarbucks<Key,T>::~zirkleacStarbucks(void)
+//template <class Key, class T>
+zirkleacStarbucks::~zirkleacStarbucks(void)
 {
 }
 
@@ -89,6 +88,7 @@ void build(Entry* c, int n){
 	//	add(c[i]);
 	//}
 }
+
 Entry* getNearest(double x, double y){
 	return getNearestr(x,y,root)->data;
 

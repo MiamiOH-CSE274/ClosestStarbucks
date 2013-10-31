@@ -1,5 +1,5 @@
 #pragma once
-#include "c:\users\andrew\desktop\starbucks\starbucks.h"
+#include "starbucks.h"
 //template <class Entry>
 class Node {
 public:
@@ -10,8 +10,8 @@ public:
   Node* quadQuad;
 };
 //#include "Starbucks.h";
-template <class Key, class T>
-class zirkleacStarbucks : public Starbucks<Key, Entry> //:
+//template <class Key, class T>
+class zirkleacStarbucks// : public Starbucks<Key, Entry> //:
 	//public Starbucks
 {
 
@@ -19,7 +19,7 @@ public:
 	
 	zirkleacStarbucks(void);
 	virtual ~zirkleacStarbucks(void);
-	Entry getNearest();
+	Entry* getNearest(double x, double y);
 	//void build();
 	void build(Entry* c, int n);
 private:
