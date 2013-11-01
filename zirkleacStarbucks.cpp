@@ -13,7 +13,7 @@ zirkleacStarbucks::~zirkleacStarbucks(void)
 {
 }
 
-Node* addr(std::string s,std::string adr,double x, double y, Node* r){
+Node* zirkleacStarbucks::addr(std::string s,std::string adr,double x, double y, Node* r){
 	if(r==0){
 		Node* n= new Node;
 		Entry* e= new Entry();
@@ -48,7 +48,7 @@ Node* addr(std::string s,std::string adr,double x, double y, Node* r){
 	}
 }
 
-Node* getNearestr(double x, double y, Node* r){
+Node* zirkleacStarbucks::getNearestr(double x, double y, Node* r){
 	if(r==0)
 		return r;
 	if(abs(r->data->x-x)<=.00001 && abs(r->data->y-y)<=.00001)
@@ -83,17 +83,17 @@ Node* getNearestr(double x, double y, Node* r){
 	}
 }
 
-void build(Entry* c, int n){
+void zirkleacStarbucks::build(Entry* c, int n){
 	//for (int i=0; ;i++){
 	//	add(c[i]);
 	//}
 }
 
-Entry* getNearest(double x, double y){
+Entry* zirkleacStarbucks::getNearest(double x, double y){
 	return getNearestr(x,y,root)->data;
 
 }
-void add(std::string s,std::string adr,double x, double y){
+void zirkleacStarbucks::add(std::string s,std::string adr,double x, double y){
 	addr(s,adr,x,y,root);
 
 }

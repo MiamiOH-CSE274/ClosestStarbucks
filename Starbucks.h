@@ -19,7 +19,7 @@
 #include <string>
 
 class Entry {
- public:
+public:
   std::string city;
   std::string address;
   double x; //longitude

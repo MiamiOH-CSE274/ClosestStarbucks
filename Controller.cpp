@@ -46,7 +46,6 @@ double distance(double long1, double lat1, double long2, double lat2){
   return d;
 }
 
-
 /*
  * This is a helper function that reads in the Starbucks.csv file. If you modified your Starbucks.csv,
  *  or if Starbucks.csv is not in the project's folder, then this might blow up on you.
@@ -183,6 +182,6 @@ int main(){
     std::cout << "Error percentage is: " << 100.0*(error-1.0) << std::endl; //Note that 0.0 is the best error level
 
   }
-
+  std::cin.ignore();
   return 0;
 }
