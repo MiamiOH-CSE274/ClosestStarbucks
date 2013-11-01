@@ -10,22 +10,22 @@ class SSet {
 
   //Add a new item, x, with Key k.
   // If an item with Key k already exists, overwrite it
-  virtual void add(Key k, T x) = 0;
+  virtual void add(Key lat, Key lon, T x) = 0;
 
-  //Remove the item with Key k. If there is no such item, do nothing.
-  virtual void remove(Key k) = 0;
+  //Remove the item with Key lat, Key lon. If there is no such item, do nothing.
+  virtual void remove(Key lat, Key lon) = 0;
 
-  //Return the item with Key k. 
+  //Return the item with Key lat, Key lon. 
   // If there is no such item, throw an exception.
-  virtual T find(Key k) = 0;
-  //Return true if there is an item with Key k in the table. If not,
+  virtual T find(Key lat, Key lon) = 0;
+  //Return true if there is an item with Key lat, Key lon in the table. If not,
   // return false
-  virtual bool keyExists(Key k) = 0;
+  virtual bool keyExists(Key lat, Key lon) = 0;
 
   //If there is a key in the set that is > k,
   // return the first such key. If not, return k
-  virtual Key next(Key k) = 0;
+  virtual T* next(Key lat, Key lon) = 0;
   //If there is a key in the set that is < k,
   // return the first such key. If not, return k
-  virtual Key prev(Key k) = 0;
+  virtual T* prev(Key lat, Key lon) = 0;
 };

@@ -24,24 +24,24 @@ class BST : public SSet <Key,T> {
 
   //Add a new item, x, with Key k.
   // If an item with Key k already exists, overwrite it
-  virtual void add(Key k, T x);
+  virtual void add(Key lat, Key lon, T x);
 
   //Remove the item with Key k. If there is no such item, do nothing.
-  virtual void remove(Key k);
+  virtual void remove(Key lat, Key lon);
 
   //Return the item with Key k. 
   // If there is no such item, throw an exception.
-  virtual T find(Key k);
+  virtual T find(Key lat, Key lon);
   //Return true if there is an item with Key k in the table. If not,
   // return false
-  virtual bool keyExists(Key k);
+  virtual bool keyExists(Key lat, Key lon);
 
   //If there is a key in the set that is > k,
   // return the first such key. If not, return k
-  virtual Key next(Key k);
+  virtual T* next(Key lat, Key lon);
   //If there is a key in the set that is < k,
   // return the first such key. If not, return k
-  virtual Key prev(Key k);
+  virtual T* prev(Key lat, Key lon);
 
 private:
   Node<Key,T>* root;
@@ -50,12 +50,12 @@ private:
   //These are the recursive versions of each of your methods.
   // You should return the address of the new root node, whether
   // or not the root node changes.
-  virtual Node<Key,T>* add(Key k, T x, Node<Key,T>* r);
-  virtual Node<Key,T>* remove(Key k, Node<Key,T>* r);
+  virtual Node<Key,T>* add(Key lat, Key lon, T x, Node<Key,T>* r, int level);
+  virtual Node<Key,T>* remove(Key lat, Key lon, Node<Key,T>* r,int level);
 
   //This one returns the address of the found node, NULL
   // if not found
-  virtual Node<Key,T>* find(Key k, Node<Key,T>* r);
+  virtual Node<Key,T>* find(Key lat, Key lon, Node<Key,T>* r,int level);
 
   //Find the item in the sub-tree rooted at r which has the smallest key
   virtual Node<Key,T>* min(Node<Key,T>* r);
@@ -64,8 +64,8 @@ private:
   virtual Node<Key,T>* max(Node<Key,T>* r);
 
   //Find the next/prev node, and return its address
-  virtual Node<Key,T>* next(Key k, Node<Key,T>* r);
-  virtual Node<Key,T>* prev(Key k, Node<Key,T>* r);
+  virtual Node<Key,T>* next(Key lat, Key lon, Node<Key,T>* r,int level);
+  virtual Node<Key,T>* prev(Key lat, Key lon, Node<Key,T>* r,int level);
 
 };
 
