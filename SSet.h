@@ -17,7 +17,7 @@ class SSet {
 
   //Return the item with Key lat, Key lon. 
   // If there is no such item, throw an exception.
-  virtual T find(Key lat, Key lon) = 0;
+  virtual T* find(Key lat, Key lon) = 0;
   //Return true if there is an item with Key lat, Key lon in the table. If not,
   // return false
   virtual bool keyExists(Key lat, Key lon) = 0;

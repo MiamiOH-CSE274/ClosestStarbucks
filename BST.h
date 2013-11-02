@@ -31,7 +31,7 @@ class BST : public SSet <Key,T> {
 
   //Return the item with Key k. 
   // If there is no such item, throw an exception.
-  virtual T find(Key lat, Key lon);
+  virtual T* find(Key lat, Key lon);
   //Return true if there is an item with Key k in the table. If not,
   // return false
   virtual bool keyExists(Key lat, Key lon);
@@ -64,8 +64,8 @@ private:
   virtual Node<Key,T>* max(Node<Key,T>* r);
 
   //Find the next/prev node, and return its address
-  virtual Node<Key,T>* next(Key lat, Key lon, Node<Key,T>* r,int level);
-  virtual Node<Key,T>* prev(Key lat, Key lon, Node<Key,T>* r,int level);
+  virtual Node<Key,T>* next(Key lat, Key lon, Node<Key,T>* r,int level,Node<Key,T>* recordHolder);
+  virtual Node<Key,T>* prev(Key lat, Key lon, Node<Key,T>* r,int level,Node<Key,T>* recordHolder);
 
 };
 
