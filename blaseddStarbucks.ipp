@@ -9,6 +9,12 @@ blaseddStarbucks:: ~blaseddStarbucks(){
 }
 
 Entry* blaseddStarbucks:: getNearest(double x, double y){
+    
+    if (tree.keyExists(y, x)) {
+        Entry* actual = tree.find(y, x);
+        return actual;
+    }
+    
     Entry* next = tree.next(y, x);
     Entry* prev = tree.prev(y, x);
     
@@ -27,30 +33,31 @@ Entry* blaseddStarbucks:: getNearest(double x, double y){
 
 void blaseddStarbucks::build(Entry *c, int n){
 
-    int* indiciesToSkip   = new int[n];
-    int indexOfTheArray = 0;
-    for (int i=0; i<n-1; i++) {
-        bool foundAmatch = false;
-        Entry cur = c[i];
-        for (int j=i+1;j<n && !foundAmatch;j++){
-            Entry toCompare = c[j];
-            if( abs(cur.x - toCompare.x)<= 0.00001 &&
-               abs(cur.y - toCompare.y)<= 0.00001){
-                indiciesToSkip[indexOfTheArray] = i;
-                foundAmatch = true;
-                indexOfTheArray++;
-            }
-        }
-        
-    }
-    indexOfTheArray = 0;
+//    int* indiciesToSkip   = new int[n];
+//    int indexOfTheArray = 0;
+//    for (int i=0; i<n-1; i++) {
+//        bool foundAmatch = false;
+//        Entry cur = c[i];
+//        for (int j=i+1;j<n && !foundAmatch;j++){
+//            Entry toCompare = c[j];
+//            foundAmatch = false;
+//            if( cur.x == toCompare.x &&
+//               cur.y == toCompare.y){
+//                indiciesToSkip[indexOfTheArray] = i;
+//                foundAmatch = true;
+//                indexOfTheArray++;
+//            }
+//        }
+//        
+//    }
+//    indexOfTheArray = 0;
     for (int i = 0; i<n; i++) {
-        if (indiciesToSkip[indexOfTheArray]==i) {
-            indexOfTheArray++;
-        }
-        else{
+//        if (indiciesToSkip[indexOfTheArray]==i) {
+//            indexOfTheArray++;
+//        }
+        //else{
             tree.add(c[i].x, c[i].y, c[i]);
-        }
+        //}
     }
     
 }
