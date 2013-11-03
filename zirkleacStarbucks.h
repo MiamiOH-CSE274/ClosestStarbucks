@@ -25,7 +25,7 @@ public:
 	void add(std::string s,std::string adr,double x, double y);
 private:
 	void add(Entry r);
-	
+	Node* root;
 	Node* getNearestr(double x, double y, Node* r);
 	Node* addr(std::string s,std::string adr,double x, double y, Node*  r);
 	//Node<Entry>* root;

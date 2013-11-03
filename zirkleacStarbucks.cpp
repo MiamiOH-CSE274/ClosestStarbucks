@@ -1,11 +1,12 @@
 #include "zirkleacStarbucks.h"
 //#define NULL 0;
-Node* root;
+
 //zirkleacStarbucks::zirkleacStarbucks():Starbucks<class Key, class T>(){}
 //template <class Key, class T>
 zirkleacStarbucks::zirkleacStarbucks()
 {
 	root = NULL;
+	
 }
 
 //template <class Key, class T>
@@ -14,7 +15,7 @@ zirkleacStarbucks::~zirkleacStarbucks(void)
 }
 
 Node* zirkleacStarbucks::addr(std::string s,std::string adr,double x, double y, Node* r){
-	if(r==0){
+	if(r==NULL){
 		Node* n= new Node;
 		Entry* e= new Entry();
 		e->city=s;
@@ -22,26 +23,40 @@ Node* zirkleacStarbucks::addr(std::string s,std::string adr,double x, double y, 
 		e->x=x;
 		e->y=y;
 		n->data=e;
+		n->firQuad=NULL;
+		n->quadQuad=NULL;
+		n->secQuad=NULL;
+		n->triQuad=NULL;
+		//r=n;
 		return n;
 	}
 	else{ 
 		if(abs(r->data->x - x) <=.00001)
-			return NULL;
+			 return r;
 		else{ 
 			if(abs(r->data->y- y)<=.00001)
-				return NULL;
+				return r;
 			else{ 
 				if(r->data->x<x){
-					if(r->data->y<y)
-						return addr(s,adr,x,y,r->firQuad);
-					else
-						return addr(s,adr,x,y,r->quadQuad);
+					if(r->data->y<y){
+						r->firQuad= addr(s,adr,x,y,r->firQuad);
+						return r;
+					}
+					else{
+						r->quadQuad= addr(s,adr,x,y,r->quadQuad);
+						return r; 
+					}
 				}
 				else {
-					if(r->data->y<y)
-						return addr(s,adr,x,y,r->secQuad);
-					else
-						return addr(s,adr,x,y,r->triQuad);
+					if(r->data->y<y){
+						r->secQuad= addr(s,adr,x,y,r->secQuad);
+						return r;
+					}
+					else{
+
+						r->triQuad= addr(s,adr,x,y,r->triQuad);
+						return r;
+					}
 				}
 			}
 		}
@@ -95,6 +110,21 @@ void zirkleacStarbucks::add(std::string s,std::string adr,double x, double y){
 }
 
 void zirkleacStarbucks::add(Entry e){
+	if(root==NULL){
+		Node* n= new Node;
+		Entry* j= new Entry();
+		j->city=e.city;
+		j->address=e.address;
+		j->x=e.x;
+		j->y=e.y;
+		n->data=j;
+		n->firQuad=NULL;
+		n->quadQuad=NULL;
+		n->secQuad=NULL;
+		n->triQuad=NULL;
+		root=n;
+		return;
+	}
 	addr(e.city, e.address, e.x, e.y, root);
 }
 

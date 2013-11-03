@@ -35,7 +35,7 @@ Questions
 
 #### 1. Which type of data structure did you choose? Explain, in English, the main ideas behind your data structure.
 
-TODO
+I chose a mixture of
 
 #### 2. Explain, in English, the worst-case running time of each of your methods, along with a justification of your claims.
 
