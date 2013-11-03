@@ -12,7 +12,7 @@
 
 //#include "Starbucks.h"
 #include "zirkleacStarbucks.h"
-//#include "zirkleacStarbucks.cpp"
+
 
 #define PI 3.14159265
 //This code is based on http://www.movable-type.co.uk/scripts/latlong.html
@@ -107,7 +107,7 @@ int main(){
 	sS.build(entryList,n);
     clock_t endb = clock();
     std::cout << "Building the data structure took: " << 1000.0*(endb-startb)/CLOCKS_PER_SEC << " milliseconds" << std::endl;
-
+	
     /* 
      * TEST FOR SPEED
      * Do many searches, and compute the average time per search. -- This should take between

@@ -11,7 +11,7 @@ public:
 };
 //#include "Starbucks.h";
 //template <class Key, class T>
-class zirkleacStarbucks// : public Starbucks<Key, Entry> //:
+class zirkleacStarbucks: public Starbucks
 	//public Starbucks
 {
 
