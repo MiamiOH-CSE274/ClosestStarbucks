@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <ctime>
 
 #include "blaseddStarbucks.h"
 
@@ -114,8 +115,8 @@ int main(){
     clock_t start = clock();
     int numTrials = 1000;
     for(int i=0; i<numTrials; i++){
-      double x = ((double)rand())/RAND_MAX;
-      double y = ((double)rand())/RAND_MAX;
+      double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+      double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
       Entry* tmp = sS.getNearest(x, y);
     }
     clock_t end = clock();
@@ -124,8 +125,8 @@ int main(){
       start = clock();
       numTrials = 10000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
+	double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+	double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
 	Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
@@ -135,8 +136,8 @@ int main(){
       start = clock();
       numTrials = 100000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
+	double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+	double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
 	Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
@@ -146,8 +147,8 @@ int main(){
       start = clock();
       numTrials = 1000000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
+	double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+	double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
 	Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
@@ -176,6 +177,15 @@ int main(){
     optTotal += 2.3306897598873859;
     studentTotal += distance(testS->x, testS->y,-86.75,36.0);
     
+    testS = sS.getNearest(-100.00,36.0); //Should be the "Albertsons-Amarillo #4203" location
+    optTotal += 183.22427281895867;
+    studentTotal += distance(testS->x, testS->y,-100.0,36.0);
+
+    testS = sS.getNearest(-110.00,40.0); //Should be the "University Mall- Orem" location
+    optTotal += 146.33892968836741;
+    studentTotal += distance(testS->x, testS->y,-110.0,40.0);
+
+
     double error = studentTotal/optTotal;
     std::cout << "Error percentage is: " << 100.0*(error-1.0) << std::endl; //Note that 0.0 is the best error level
 
