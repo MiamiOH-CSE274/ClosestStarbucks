@@ -56,7 +56,7 @@ void blaseddStarbucks::build(Entry *c, int n){
 //            indexOfTheArray++;
 //        }
         //else{
-            tree.add(c[i].x, c[i].y, c[i]);
+            tree.add(c[i].y, c[i].x, c[i]);
         //}
     }
     

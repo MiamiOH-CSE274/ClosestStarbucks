@@ -1,9 +1,11 @@
 #define dNULL 0
 #include <string>
 
+
+
 template <class Key, class T>
 BST<Key,T>::BST(){
-    root = dNULL;
+    root = NULL;
 }
 
 template <class Key, class T>
@@ -22,15 +24,15 @@ unsigned long BST<Key,T>::size(){
 template <class Key, class T>
 unsigned long BST<Key,T>::size(Node<Key,T>* r){
     unsigned long numItems = 0;
-    if (r==dNULL){
+    if (r==NULL){
         return numItems;
     }
     else numItems++;
-    if (r->left==dNULL) {
+    if (r->left==NULL) {
         numItems += size(r->right);
     }
     
-    else if (r->right==dNULL) {
+    else if (r->right==NULL) {
         numItems+= size(r->left);
     }
     
@@ -61,7 +63,7 @@ void BST<Key,T>::remove(Key lat, Key lon){
 template <class Key, class T>
 T* BST<Key,T>::find(Key lat, Key lon){
     Node<Key, T>* data = find(lat, lon, root,0);
-    if (data==dNULL) {
+    if (data==NULL) {
         throw (std::string)"This key does not exist in the tree.";
     }
     T* place = &data->data;
@@ -73,7 +75,7 @@ template <class Key, class T>
 bool BST<Key,T>::keyExists(Key lat, Key lon){
     Node<Key,T>* data = find(lat, lon, root,0);
     
-    if (data==dNULL) {
+    if (data==NULL) {
         return false;
     }
     else return true;
@@ -83,70 +85,63 @@ bool BST<Key,T>::keyExists(Key lat, Key lon){
 // return the first such key. If not, return k
 template <class Key, class T>
 T* BST<Key,T>::next(Key lat, Key lon){
-   
-   Node<Key, T>* toReturn = next(lat, lon, root,0, root);
+    
+    double dist = distance(root->data, lon, lat);
+   Node<Key, T>* toReturnLeft = next(lat, lon, root->left,1, root->left,true, dist);
+    Node<Key, T>* toReturnRight = next(lat, lon, root->right, 1, root->right, true, dist);
     T* place;
     
 //    if (toReturn==dNULL) {
 //        return k;
 //   }
-    place = &toReturn->data;
+    place = &toReturnLeft->data;
     return place;
 
 }
 
 template <class Key, class T>
-Node<Key,T>* BST<Key,T>::next(Key lat, Key lon, Node<Key,T>* r, int level,Node<Key,T>* recordHolder){
-    Node<Key,T>* curPtr;
+Node<Key,T>* BST<Key,T>::next(Key lat, Key lon, Node<Key,T>* r, int level,Node<Key,T>* recordHolder, bool hasGottenCloser, double recordDist){
     Key k;
-    
-    if(level%2==0)
+    if(level==0)
         k = lat;
     else k = lon;
     
-    if(r==NULL){
-        return NULL;
+    double distLL, distLR, distRL, distRR, distL, distR;
+    if(r->left !=NULL){
+        if(r->left->left!=NULL)
+            distLL = distance(r->left->left->data, lon, lat);
+        if (r->left->right!=NULL)
+            distLR = distance(r->left->right->data, lon, lat);
+        distL = distance(r->left->data, lon, lat);
+    }
+    if (r->right!=NULL) {
+        if (r->right->left!=NULL)
+            distRL = distance(r->right->left->data, lon, lat);
+        if(r->right->right!=NULL)
+            distRR = distance(r->right->right->data, lon, lat);
+        distR = distance(r->right->data, lon, lat);
+        
     }
     
-    if (r->k >k){
-        recordHolder = r;
-        curPtr= next(lat, lon, r->left, ++level,recordHolder);
+    
+    if(distLL<recordDist)
+        
+    
+    
+    
+    
+    if (distL<recordDist) {
+        recordHolder = r->left
     }
     
-    else if(r->k <k){
-        curPtr= next(lat, lon, r->right, ++level,recordHolder);
+    if (distR<recordDist) {
+        
     }
     
-    else{
-        if(r->right !=NULL)
-            curPtr= next(lat, lon, r->right, ++level,recordHolder);
-        else curPtr= dNULL;
-    }
     
-    //    while (curPtr !=dNULL) {
-    //        if (curPtr->k > k) {
-    //            previousPtr = curPtr;
-    //            curPtr = curPtr->left;
-    //        }
-    //        else if (curPtr->k < k){
-    //            curPtr = curPtr->right;
-    //        }
-    //        else{
-    //            curPtr = curPtr->right;
-    //        }
-    //    }
-    //
-    //    if (previousPtr->k <k) {
-    //        return dNULL;
-    //    }
     
-    if(curPtr==dNULL && r->k>k)
-        return recordHolder;
     
-    else if (curPtr ==NULL)
-        return r;
-    
-    else return curPtr;
+
 }
 
 //If there is a key in the set that is < k,
@@ -165,58 +160,7 @@ T* BST<Key,T>::prev(Key lat, Key lon){
 
 template <class Key, class T>
 Node<Key,T>* BST<Key,T>::prev(Key lat, Key lon, Node<Key,T>* r, int level, Node<Key,T>* recordHolder){
-    Node<Key,T>* curPtr;
-        Key k;
-    if(level%2==0)
-        k = lat;
-    else k = lon;
-
-    if(r==NULL){
-        return NULL;
-    }
-    
-//    if(distance(recordHolder->data.x, recordHolder->data.y, lon, lat)> distance(r->data.x, r->data.y, lon, lat)){
-//        
-//    }
-    
-    if (r->k >k){
-        //recordHolder = r;
-        curPtr= prev(lat, lon, r->left, ++level, recordHolder);
-    }
-    
-    else if(r->k <k){
-        recordHolder = r;
-        curPtr= prev(lat, lon, r->right, ++level, recordHolder);
-    }
-    
-    else{
-        if(r->left !=NULL)
-            curPtr= prev(lat, lon, r->left, ++level, recordHolder);
-        else curPtr= dNULL;
-    }
-    
-    
-    //    while (curPtr !=dNULL) {
-//        if (curPtr->k < k) {
-//            previousPtr = curPtr;
-//            curPtr = curPtr->right;
-//        }
-//        else if (curPtr->k > k){
-//            previousPtr = curPtr;
-//            curPtr = curPtr->left;
-//        }
-//        else{
-//            curPtr = curPtr->left;
-//        }
-//    }
-    
-    if(curPtr==dNULL && r->k < k)
-        return recordHolder;
-    else if (curPtr==NULL)
-        return r;
-    
-    else return curPtr;
-}
+   }
 
 
 
@@ -258,42 +202,48 @@ Node<Key,T>* BST<Key,T>::remove(Key lat, Key lon, Node<Key,T>* r,int level){
     if(level%2==0)
         k = lon;
     else k = lat;
-    if (r == dNULL) {
-        return dNULL;
+    if (r == NULL) {
+        return NULL;
     }
     else if (r->k==k){
-        if (r->left==dNULL && r->right==dNULL) {
+        if (r->left==NULL && r->right==NULL) {
             delete r;
-            return dNULL;
+            return NULL;
         }
-        else if (r->left==dNULL || r->right==dNULL){
-            Node<Key, T>* newR = r->left;
-            if (newR==dNULL) {
-                newR = r->right;
+        else if  (r->left!=NULL && r->right!=NULL){
+            Node<Key, T>* newR = min(r->right);
+            Key temp = r->k;
+            T tempData = r->data;
+            r->data = newR->data;
+            r->k = newR->k;
+            newR->k =temp;
+            newR->data = tempData;
+            r->right = remove(lat, lon, r->right, ++level);
+            return r;
+            
+            
+        }
+        
+        else{
+            Node<Key, T>* newR = r->right;
+            if (newR==NULL) {
+                newR = r->left;
+                delete r;
+                return newR;
             }
             delete r;
             return newR;
-        }
-        else{
-            Node<Key, T>* maxR = max(r->left);
-            Key temp = maxR->k;
-
-            maxR->k = r->k;
-            r->k = temp;
-            T dataTemp = r->data;
-            r->data = maxR->data;
-            maxR->data = dataTemp;
-            //FIGURE OUT WHICH LEVEL THIS NEEDS TO BE
-            r->left = remove(lat, lon, r->left, ++level);
-            return r;
+            
         }
     }
     
     else if (r->k >k){
-       return r = remove(lat, lon, r->left, ++level);
+        r->left = remove(lat, lon, r->left, ++level);
     }
     
-    else return r= remove(lat, lon, r->right, ++level);
+    else  r->right= remove(lat, lon, r->right, ++level);
+    
+    return r;
     
 }
 
@@ -301,8 +251,8 @@ template <class Key, class T>
 Node<Key,T>* BST<Key,T>::find(Key lat, Key lon, Node<Key,T>* r,int level){
         Key k;
     if(level%2==0)
-        k = lat;
-    else k = lon;
+        k = lon;
+    else k = lat;
     if (r==dNULL) {
         return dNULL;
     }
