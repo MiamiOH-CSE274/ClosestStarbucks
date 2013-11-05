@@ -113,11 +113,11 @@ int main(){
      * Do many searches, and compute the average time per search. -- This should take between
      * 5 and 50 seconds.
      */
-    clock_t start = clock();
+        clock_t start = clock();
     int numTrials = 1000;
     for(int i=0; i<numTrials; i++){
-      double x = ((double)rand())/RAND_MAX;
-      double y = ((double)rand())/RAND_MAX;
+      double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+      double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
       Entry* tmp = sS.getNearest(x, y);
     }
     clock_t end = clock();
@@ -126,9 +126,9 @@ int main(){
       start = clock();
       numTrials = 10000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
-	Entry* tmp = sS.getNearest(x, y);
+        double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+        double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
+        Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
     }
@@ -137,9 +137,9 @@ int main(){
       start = clock();
       numTrials = 100000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
-	Entry* tmp = sS.getNearest(x, y);
+        double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+        double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
+        Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
     }
@@ -148,9 +148,9 @@ int main(){
       start = clock();
       numTrials = 1000000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
-	Entry* tmp = sS.getNearest(x, y);
+        double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+        double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
+        Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
     }
@@ -177,7 +177,8 @@ int main(){
     testS = sS.getNearest(-86.75,36.0); //Should be the "Target Brentwood T-1983" location
     optTotal += 2.3306897598873859;
     studentTotal += distance(testS->x, testS->y,-86.75,36.0);
-    
+
+
     double error = studentTotal/optTotal;
     std::cout << "Error percentage is: " << 100.0*(error-1.0) << std::endl; //Note that 0.0 is the best error level
 

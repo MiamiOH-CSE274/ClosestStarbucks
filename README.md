@@ -35,11 +35,11 @@ Questions
 
 #### 1. Which type of data structure did you choose? Explain, in English, the main ideas behind your data structure.
 
-I chose a mixture of
+I chose a variant binary search tree that made each entry the center of a 4 quadrant graph, which checked a new entry to be either greater than or less than both the x and y points and placed it in that quadrant
 
 #### 2. Explain, in English, the worst-case running time of each of your methods, along with a justification of your claims.
 
-TODO
+The worst case would probably be directly related to the number of items in the data structure, for all the methods if every position was down a specific quadrant, as I do not know how to make a binary search tree rebalance itself
 
 Portfolio Video
 =========
@@ -55,4 +55,4 @@ The video should certainly be less than 2 minutes long. I (or the grading assist
 
 #### 1. Give the link to your portfolio video on YouTube.
 
-TODO
+https://www.youtube.com/watch?v=g0OfJyRAlcY&feature=youtu.be

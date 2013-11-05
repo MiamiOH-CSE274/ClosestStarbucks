@@ -70,13 +70,13 @@ Node* zirkleacStarbucks::getNearestr(double x, double y, Node* r){
 		return r;
 	if(r->data->x<x){
 		if(r->data->y<y){
-			if(r->firQuad==0)
+			if(r->firQuad==NULL)
 				return r;
 			else
 				return getNearestr(x,y,r->firQuad);
 		}
 		else{
-			if(r->quadQuad==0)
+			if(r->quadQuad==NULL)
 				return r;
 			else
 				return getNearestr(x,y,r->quadQuad);
@@ -84,13 +84,13 @@ Node* zirkleacStarbucks::getNearestr(double x, double y, Node* r){
 	}
 	else {
 		if(r->data->y<y){
-			if(r->secQuad==0)
+			if(r->secQuad==NULL)
 				return r;
 			else
 				return getNearestr(x,y,r->secQuad);
 		}
 		else{
-			if(r->triQuad==0)
+			if(r->triQuad==NULL)
 				return r;
 			else
 				return getNearestr(x,y,r->triQuad);
