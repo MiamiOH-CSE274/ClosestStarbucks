@@ -10,6 +10,8 @@
 #include <cmath>
 #include <ctime>
 
+
+
 #include "blaseddStarbucks.h"
 
 #define PI 3.14159265
@@ -27,6 +29,23 @@ double distance(Entry& e1, Entry& e2){
   double d = R * c;
 
   return d;
+}
+
+double distance(Entry e1, double lon, double lat){
+    
+    
+    double R = 6371; // radius of earth, in km
+    double dLat = (lat-e1.y)*PI/180;
+    double dLon = (lon-e1.x)*PI/180;
+    double lat1 = e1.y*PI/180;
+    double lat2 = lat*PI/180;
+    
+    double a = sin(dLat/2) * sin(dLat/2) +
+    sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    double d = R * c;
+    
+    return d;
 }
 
 double distance(double long1, double lat1, double long2, double lat2){
