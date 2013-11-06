@@ -15,19 +15,9 @@ Entry* blaseddStarbucks:: getNearest(double x, double y){
         return actual;
     }
     
-    Entry* next = tree.next(y, x);
-    Entry* prev = tree.prev(y, x);
+    Entry* nearest = tree.next(y, x);
     
-    Entry* location = new Entry();
-    location->x = x;
-    location->y=y;
-    
-    double nextDist = distance(*next, *location);
-    double prevDist = distance(*prev, *location);
-    
-    if(nextDist<prevDist)
-        return next;
-    return prev;
+    return nearest;
     
 }
 
