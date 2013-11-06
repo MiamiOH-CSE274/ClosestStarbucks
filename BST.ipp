@@ -87,8 +87,8 @@ template <class Key, class T>
 T* BST<Key,T>::next(Key lat, Key lon){
     
     double dist = distance(root->data, lon, lat);
-   Node<Key, T>* toReturnLeft = next(lat, lon, root->left,1, root->left,true, dist);
-    Node<Key, T>* toReturnRight = next(lat, lon, root->right, 1, root->right, true, dist);
+   Node<Key, T>* toReturnLeft = next(lat, lon, root->left, root->left,true, dist);
+   Node<Key, T>* toReturnRight = next(lat, lon, root->right, root->right, true, dist);
     T* place;
     
 //    if (toReturn==dNULL) {
@@ -100,13 +100,18 @@ T* BST<Key,T>::next(Key lat, Key lon){
 }
 
 template <class Key, class T>
-Node<Key,T>* BST<Key,T>::next(Key lat, Key lon, Node<Key,T>* r, int level,Node<Key,T>* recordHolder, bool hasGottenCloser, double recordDist){
-    Key k;
-    if(level==0)
-        k = lat;
-    else k = lon;
+Node<Key,T>* BST<Key,T>::next(Key lat, Key lon, Node<Key,T>* r,Node<Key,T>* recordHolder, bool hasGottenCloser, double recordDist){
+//    Key k;
+//    if(level==0)
+//        k = lat;
+//    else k = lon;
+    
+    if (r==NULL) {
+        return recordHolder;
+    }
     
     double distLL, distLR, distRL, distRR, distL, distR;
+    distLL = distLR = distRL = distRR = distL = distR = recordDist+1;
     if(r->left !=NULL){
         if(r->left->left!=NULL)
             distLL = distance(r->left->left->data, lon, lat);
@@ -124,23 +129,71 @@ Node<Key,T>* BST<Key,T>::next(Key lat, Key lon, Node<Key,T>* r, int level,Node<K
     }
     
     
-    if(distLL<recordDist)
-        
+    Node<Key,T>* llCloser;
+    Node<Key,T>* lrCloser;
+    //Continue down the left -> L/R track
+    if(distLL<recordDist){
+        //recordHolder = r->left->left;
+        llCloser = next(lat, lon, r->left->left, r->left->left, true, distLL);
+    }
+    else if (hasGottenCloser)
+        llCloser = next(lat, lon, r->left->left, recordHolder, false, recordDist);
     
+    else llCloser = r;
     
-    
-    
-    if (distL<recordDist) {
-        recordHolder = r->left
+    if (distLR<recordDist) {
+        lrCloser = next(lat, lon, r->left->right, r->left->right, true, distLR);
     }
     
-    if (distR<recordDist) {
-        
+    else if (hasGottenCloser)
+        lrCloser = next(lat, lon, r->left->right, recordHolder, false, recordDist);
+    
+    else lrCloser = r;
+    
+    //Continue down the right -> L/R track
+    Node<Key,T>* rlCloser;
+    Node<Key,T>* rrCloser;
+    if(distRL<recordDist){
+        //recordHolder = r->left->left;
+        rlCloser = next(lat, lon, r->right->left, r->right->left, true, distLL);
+    }
+    else if (distRL>=recordDist && hasGottenCloser)
+        rlCloser = next(lat, lon, r->right->left, recordHolder, false, recordDist);
+    
+    else rlCloser = r;
+    
+    if (distRR<recordDist) {
+        rrCloser = next(lat, lon, r->right->right, r->right->right, true, distLR);
     }
     
+    else if (distRR>=recordDist && hasGottenCloser)
+        rrCloser = next(lat, lon, r->right->right, recordHolder, false, recordDist);
+    
+    else rrCloser = r;
+    
+    Node<Key,T>* lClosest;
+    Node<Key,T>* rClosest;
     
     
+    if (distL< distance(lrCloser->data, lon, lat) && distL < distance(llCloser->data, lon, lat)) {
+        lClosest = r->left;
+    }
     
+    else if (distance(lrCloser->data, lon, lat) < distance(llCloser->data, lon, lat))
+        lClosest = lrCloser;
+    else lClosest = llCloser;
+    
+    if (distR< distance(rlCloser->data, lon, lat) && distR< distance(rrCloser->data, lon, lat)) {
+        rClosest = r->right;
+    }
+    else if (distance(rrCloser->data, lon, lat) < distance(rlCloser->data, lon, lat))
+        rClosest = rrCloser;
+    else rClosest = rlCloser;
+    
+    if (distance(lClosest->data, lon, lat) < distance(rClosest->data, lon, lat)) {
+        return lClosest;
+    }
+    else return rClosest;
 
 }
 
@@ -160,6 +213,7 @@ T* BST<Key,T>::prev(Key lat, Key lon){
 
 template <class Key, class T>
 Node<Key,T>* BST<Key,T>::prev(Key lat, Key lon, Node<Key,T>* r, int level, Node<Key,T>* recordHolder){
+    return r;
    }
 
 

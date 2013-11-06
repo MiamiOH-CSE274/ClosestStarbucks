@@ -64,7 +64,7 @@ private:
   virtual Node<Key,T>* max(Node<Key,T>* r);
 
   //Find the next/prev node, and return its address
-  virtual Node<Key,T>* next(Key lat, Key lon, Node<Key,T>* r,int level,Node<Key,T>* recordHolder);
+  virtual Node<Key,T>* next(Key lat, Key lon, Node<Key,T>* r, Node<Key,T>* recordHolder, bool hasGottenCloser, double recordDist);
   virtual Node<Key,T>* prev(Key lat, Key lon, Node<Key,T>* r,int level,Node<Key,T>* recordHolder);
 
 };
