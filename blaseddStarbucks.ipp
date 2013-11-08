@@ -6,6 +6,7 @@ blaseddStarbucks::blaseddStarbucks(){
     //tree = new BST<double, Entry>();
 }
 blaseddStarbucks:: ~blaseddStarbucks(){
+    
 }
 
 Entry* blaseddStarbucks:: getNearest(double x, double y){
