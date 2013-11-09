@@ -13,7 +13,7 @@ class SSet {
   virtual void add(Key lat, Key lon, T x) = 0;
 
   //Remove the item with Key lat, Key lon. If there is no such item, do nothing.
-  virtual void remove(Key lat, Key lon) = 0;
+  virtual void remove() = 0;
 
   //Return the item with Key lat, Key lon. 
   // If there is no such item, throw an exception.
