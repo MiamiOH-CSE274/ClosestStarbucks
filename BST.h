@@ -28,7 +28,7 @@ class BST : public SSet <Key,T> {
   virtual void add(Key lat, Key lon, T x);
 
   //Remove the item with Key k. If there is no such item, do nothing.
-  virtual void remove(Key lat, Key lon);
+  virtual void remove();
 
   //Return the item with Key k. 
   // If there is no such item, throw an exception.
@@ -52,7 +52,7 @@ private:
   // You should return the address of the new root node, whether
   // or not the root node changes.
   virtual Node<Key,T>* add(Key lat, Key lon, T x, Node<Key,T>* r, int level);
-  virtual Node<Key,T>* remove(Key lat, Key lon, Node<Key,T>* r,int level);
+  virtual void remove(Node<Key,T>* r);
 
   //This one returns the address of the found node, NULL
   // if not found
@@ -82,9 +82,7 @@ BST<Key,T>::BST(){
 
 template <class Key, class T>
 BST<Key,T>::~BST(){
-    while (size()>0) {
-        remove(root->data.y, root->data.x);
-    }
+    remove(root);
 }
 
 //Return the number of items currently in the SSet
@@ -126,8 +124,8 @@ void BST<Key,T>::add(Key lat, Key lon, T x){
 
 //Remove the item with Key lat, Key lon. If there is no such item, do nothing.
 template <class Key, class T>
-void BST<Key,T>::remove(Key lat, Key lon){
-    root = remove(lat, lon, root,0);
+void BST<Key,T>::remove(){
+    remove(root);
 }
 
 //Return the item with Key lat, Key lon.
@@ -330,7 +328,10 @@ Node<Key,T>* BST<Key,T>::add(Key lat, Key lon, T x, Node<Key,T>* r,int level){
         return toAdd;
     }
     else if (r->k == k){
-        return r;
+        if (r->data.x == lon && r->data.y==lat) {
+            return r;
+        }
+        else r->right = add(lat, lon, x, r->right, ++level);
     }
     
     else if(r->k > k){
@@ -346,54 +347,14 @@ Node<Key,T>* BST<Key,T>::add(Key lat, Key lon, T x, Node<Key,T>* r,int level){
 }
 
 template <class Key, class T>
-Node<Key,T>* BST<Key,T>::remove(Key lat, Key lon, Node<Key,T>* r,int level){
-    Key k;
-    if(level%2==0)
-        k = lon;
-    else k = lat;
-    if (r == NULL) {
-        return NULL;
-    }
-    else if (r->k==k){
-        if (r->left==NULL && r->right==NULL) {
-            delete r;
-            return NULL;
-        }
-        else if  (r->left!=NULL && r->right!=NULL){
-            Node<Key, T>* newR = min(r->right);
-            Key temp = r->k;
-            T tempData = r->data;
-            r->data = newR->data;
-            r->k = newR->k;
-            newR->k =temp;
-            newR->data = tempData;
-            r->right = remove(lat, lon, r->right, ++level);
-            return r;
-            
-            
-        }
-        
-        else{
-            Node<Key, T>* newR = r->right;
-            if (newR==NULL) {
-                newR = r->left;
-                delete r;
-                return newR;
-            }
-            delete r;
-            return newR;
-            
-        }
-    }
+void BST<Key,T>::remove(Node<Key,T>* r){
+    if(r->left!=NULL)
+        remove(r->left);
+    if (r->right!=NULL)
+        remove(r->right);
     
-    else if (r->k >k){
-        r->left = remove(lat, lon, r->left, ++level);
-    }
-    
-    else  r->right= remove(lat, lon, r->right, ++level);
-    
-    return r;
-    
+    if (r->left==NULL && r->right==NULL) 
+        delete r;
 }
 
 template <class Key, class T>
