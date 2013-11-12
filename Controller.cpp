@@ -8,8 +8,11 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include "time.h"
 
-#include "brinkmwjStarbucks.h"
+//#include "Starbucks.h"
+#include "zirkleacStarbucks.h"
+
 
 #define PI 3.14159265
 //This code is based on http://www.movable-type.co.uk/scripts/latlong.html
@@ -42,7 +45,6 @@ double distance(double long1, double lat1, double long2, double lat2){
 
   return d;
 }
-
 
 /*
  * This is a helper function that reads in the Starbucks.csv file. If you modified your Starbucks.csv,
@@ -82,13 +84,13 @@ void readEntryList(Entry** entryList, int* n){
 
 int main(){
   {
-    brinkmwjStarbucks sS;
+    zirkleacStarbucks sS;
 
     int n;
     Entry* entryList;
     readEntryList(&entryList, &n); //Helper function
 
-    //randomly scramble the entryList
+    ///randomly scramble the entryList
     srand(5);
     for(int i=0; i<n; i++){
       int j = i + rand()%(n-i);
@@ -102,20 +104,20 @@ int main(){
      * get numbers anywhere from 0ms to 60ms.
      */
     clock_t startb = clock();
-    sS.build(entryList, n);
+	sS.build(entryList,n);
     clock_t endb = clock();
     std::cout << "Building the data structure took: " << 1000.0*(endb-startb)/CLOCKS_PER_SEC << " milliseconds" << std::endl;
-
+	
     /* 
      * TEST FOR SPEED
      * Do many searches, and compute the average time per search. -- This should take between
      * 5 and 50 seconds.
      */
-    clock_t start = clock();
+        clock_t start = clock();
     int numTrials = 1000;
     for(int i=0; i<numTrials; i++){
-      double x = ((double)rand())/RAND_MAX;
-      double y = ((double)rand())/RAND_MAX;
+      double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+      double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
       Entry* tmp = sS.getNearest(x, y);
     }
     clock_t end = clock();
@@ -124,9 +126,9 @@ int main(){
       start = clock();
       numTrials = 10000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
-	Entry* tmp = sS.getNearest(x, y);
+        double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+        double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
+        Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
     }
@@ -135,9 +137,9 @@ int main(){
       start = clock();
       numTrials = 100000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
-	Entry* tmp = sS.getNearest(x, y);
+        double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+        double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
+        Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
     }
@@ -146,9 +148,9 @@ int main(){
       start = clock();
       numTrials = 1000000;
       for(int i=0; i<numTrials; i++){
-	double x = ((double)rand())/RAND_MAX;
-	double y = ((double)rand())/RAND_MAX;
-	Entry* tmp = sS.getNearest(x, y);
+        double x = -125.0 + 73.0*((double)rand())/RAND_MAX;
+        double y = 24.0 + 25.0*((double)rand())/RAND_MAX;
+        Entry* tmp = sS.getNearest(x, y);
       }
       end = clock();
     }
@@ -175,11 +177,12 @@ int main(){
     testS = sS.getNearest(-86.75,36.0); //Should be the "Target Brentwood T-1983" location
     optTotal += 2.3306897598873859;
     studentTotal += distance(testS->x, testS->y,-86.75,36.0);
-    
+
+
     double error = studentTotal/optTotal;
     std::cout << "Error percentage is: " << 100.0*(error-1.0) << std::endl; //Note that 0.0 is the best error level
 
   }
-
+  std::cin.ignore();
   return 0;
 }

@@ -19,11 +19,12 @@
 #include <string>
 
 class Entry {
- public:
+public:
   std::string city;
   std::string address;
   double x; //longitude
   double y; //latitude
+
 };
 
 //Measure the distance between to points, in km
@@ -38,6 +39,7 @@ double distance(double long1, double lat1, double long2, double lat2);
  *  class for your own data structure. You should make a .h and .cpp for you data structure ... in my
  *  case I made brinkmwjStarbucks.h and brinkmwjStarbucks.cpp, and my class was called "brinkmwjStarbucks"
  */
+
 class Starbucks {
  public:
   /*
