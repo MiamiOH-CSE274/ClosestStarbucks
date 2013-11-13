@@ -38,11 +38,17 @@ Questions
 
 #### 1. Which type of data structure did you choose? Explain, in English, the main ideas behind your data structure.
 
-TODO
+The data structure I chose to use was a k-d tree. The main idea behind the data structure is that the tree organizes list by sorting the starbucks locations first by the x-coordinate and y-coordinate as the points progress down the tree, which creates as balanced a sorted array as possible. This also allows for easier searching since the searching algorithm can narrow-in on the location as it notices it is moving farther away from the closest starbucks.
 
 #### 2. Explain, in English, the worst-case running time of each of your methods, along with a justification of your claims.
 
-TODO
+The worst-case running time of `add`, in my kd tree is O(log n), or the height of the tree, since it will only go down one path of the tree to determine where to add the next Starbucks location. 
+
+The worst-case running time of the destructor/remove is O(n), or the number of items in the tree.
+
+The worst-case running time for the searching algorithm, `next` is a multiple of O(log n), because I could understand the algorithm going through entire paths of a subtree if the conditions are correct, but I cannot see a case where an entire half of the tree would be searched.
+
+Therefore, the destructor (which uses the kd-tree’s destructor) , and `build` both take linear time, as all of the Starbucks locations must be processed. `getNearest`, which calls the `next` of the kd-tree, will have the same running time as `next`.
 
 Portfolio Video
 =========
@@ -58,4 +64,4 @@ The video should certainly be less than 2 minutes long. I (or the grading assist
 
 #### 1. Give the link to your portfolio video on YouTube.
 
-TODO
+http://youtu.be/bdkxHROAAAs
