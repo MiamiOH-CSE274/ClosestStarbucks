@@ -11,10 +11,10 @@ blaseddStarbucks:: ~blaseddStarbucks(){
 
 Entry* blaseddStarbucks:: getNearest(double x, double y){
     
-    if (tree.keyExists(y, x)) {
-        Entry* actual = tree.find(y, x);
-        return actual;
-    }
+//    if (tree.keyExists(y, x)) {
+//        Entry* actual = tree.find(y, x);
+//        return actual;
+//    }
     
     Entry* nearest = tree.next(y, x);
     
