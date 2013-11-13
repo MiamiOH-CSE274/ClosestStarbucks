@@ -15,17 +15,8 @@ class SSet {
   //Remove the item with Key lat, Key lon. If there is no such item, do nothing.
   virtual void remove() = 0;
 
-  //Return the item with Key lat, Key lon. 
-  // If there is no such item, throw an exception.
-  virtual T* find(Key lat, Key lon) = 0;
-  //Return true if there is an item with Key lat, Key lon in the table. If not,
-  // return false
-  virtual bool keyExists(Key lat, Key lon) = 0;
-
   //If there is a key in the set that is > k,
   // return the first such key. If not, return k
   virtual T* next(Key lat, Key lon) = 0;
-  //If there is a key in the set that is < k,
-  // return the first such key. If not, return k
-  virtual T* prev(Key lat, Key lon) = 0;
+
 };

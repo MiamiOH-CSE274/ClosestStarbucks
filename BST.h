@@ -30,19 +30,11 @@ class BST : public SSet <Key,T> {
   //Remove the item with Key k. If there is no such item, do nothing.
   virtual void remove();
 
-  //Return the item with Key k. 
-  // If there is no such item, throw an exception.
-  virtual T* find(Key lat, Key lon);
-  //Return true if there is an item with Key k in the table. If not,
-  // return false
-  virtual bool keyExists(Key lat, Key lon);
+
 
   //If there is a key in the set that is > k,
   // return the first such key. If not, return k
   virtual T* next(Key lat, Key lon);
-  //If there is a key in the set that is < k,
-  // return the first such key. If not, return k
-  virtual T* prev(Key lat, Key lon);
 
 private:
   Node<Key,T>* root;
@@ -54,19 +46,10 @@ private:
   virtual Node<Key,T>* add(Key lat, Key lon, T x, Node<Key,T>* r, int level);
   virtual void remove(Node<Key,T>* r);
 
-  //This one returns the address of the found node, NULL
-  // if not found
-  virtual Node<Key,T>* find(Key lat, Key lon, Node<Key,T>* r,int level);
-
-  //Find the item in the sub-tree rooted at r which has the smallest key
-  virtual Node<Key,T>* min(Node<Key,T>* r);
-
-  //Find the item in the sub-tree rooted at r which has the largest key
-  virtual Node<Key,T>* max(Node<Key,T>* r);
 
   //Find the next/prev node, and return its address
   virtual Node<Key,T>* next(Key lat, Key lon, Node<Key,T>* r, Node<Key,T>* recordHolder, int timesHasGottenCloser, double recordDist);
-  virtual Node<Key,T>* prev(Key lat, Key lon, Node<Key,T>* r,int level,Node<Key,T>* recordHolder);
+
 
 };
 
@@ -128,28 +111,6 @@ void BST<Key,T>::remove(){
     remove(root);
 }
 
-//Return the item with Key lat, Key lon.
-// If there is no such item, throw an exception.
-template <class Key, class T>
-T* BST<Key,T>::find(Key lat, Key lon){
-    Node<Key, T>* data = find(lat, lon, root,0);
-    if (data==NULL) {
-        throw (std::string)"This key does not exist in the tree.";
-    }
-    T* place = &data->data;
-    return place;
-}
-//Return true if there is an item with Key lat, Key lon in the table. If not,
-// return false
-template <class Key, class T>
-bool BST<Key,T>::keyExists(Key lat, Key lon){
-    Node<Key,T>* data = find(lat, lon, root,0);
-    
-    if (data==NULL) {
-        return false;
-    }
-    else return true;
-}
 
 //If there is a key in the set that is > k,
 // return the first such key. If not, return k
@@ -290,25 +251,6 @@ Node<Key,T>* BST<Key,T>::next(Key lat, Key lon, Node<Key,T>* r,Node<Key,T>* reco
     
 }
 
-//If there is a key in the set that is < k,
-// return the first such key. If not, return k
-template <class Key, class T>
-T* BST<Key,T>::prev(Key lat, Key lon){
-    T* place;
-    Node<Key, T>* toReturn=prev(lat, lon, root, 0, root);
-    
-    //    if (toReturn==dNULL) {
-    //        return k;
-    //    }
-    place = &toReturn->data;
-    return place;
-}
-
-template <class Key, class T>
-Node<Key,T>* BST<Key,T>::prev(Key lat, Key lon, Node<Key,T>* r, int level, Node<Key,T>* recordHolder){
-    return r;
-}
-
 
 
 
@@ -357,44 +299,3 @@ void BST<Key,T>::remove(Node<Key,T>* r){
         delete r;
 }
 
-template <class Key, class T>
-Node<Key,T>* BST<Key,T>::find(Key lat, Key lon, Node<Key,T>* r,int level){
-    Key k;
-    if(level%2==0)
-        k = lon;
-    else k = lat;
-    if (r==dNULL) {
-        return dNULL;
-    }
-    else if (k==r->k){
-        return r;
-    }
-    else if (k>r->k){
-        return find(lat, lon, r->right, ++level);
-    }
-    else return find(lat, lon, r->left, ++level);
-}
-
-template <class Key, class T>
-Node<Key,T>* BST<Key,T>::max(Node<Key,T>* r){
-    if (r==dNULL) {
-        return dNULL;
-    }
-    else if (r->right==dNULL){
-        return r;
-    }
-    
-    else return max(r->right);
-}
-
-template <class Key, class T>
-Node<Key,T>* BST<Key,T>::min(Node<Key,T>* r){
-    if (r==dNULL) {
-        return dNULL;
-    }
-    else if (r->left==dNULL){
-        return r;
-    }
-    
-    else return min(r->left);
-}
